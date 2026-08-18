@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import { categories, getCategoryCount } from "../../lib/catalog";
+---
+
+<BaseLayout title="All categories" description="Browse every category in the adult website directory.">
+  <div class="shell page-shell">
+    <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Categories" }]} />
+    <header class="page-header">
+      <p class="eyebrow">Directory map</p>
+      <h1>All categories</h1>
+      <p>Start broad, then use tags and reviews to narrow the list.</p>
+    </header>
+    <div class="category-grid">
+      {categories.map((category) => (
+        <a class="category-tile" href={`/categories/${category.slug}/`}>
+          <span class="category-icon" aria-hidden="true">{category.icon}</span>
+          <div>
+            <span class="count-label">{getCategoryCount(category.slug)} sites</span>
+            <h2>{category.name}</h2>
+            <p>{category.description}</p>
+          </div>
+          <span class="tile-arrow" aria-hidden="true">↗</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+

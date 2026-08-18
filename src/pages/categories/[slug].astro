@@ -1,0 +1,71 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import SiteCard from "../../components/SiteCard.astro";
+import { categories, getCategorySites } from "../../lib/catalog";
+import type { Category } from "../../types";
+
+export function getStaticPaths() {
+  return categories.map((category) => ({
+    params: { slug: category.slug },
+    props: { category }
+  }));
+}
+
+interface Props {
+  category: Category;
+}
+
+const { category } = Astro.props;
+const categorySites = getCategorySites(category.slug);
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: category.name,
+  description: category.description,
+  url: new URL(`/categories/${category.slug}/`, Astro.site).href,
+  mainEntity: {
+    "@type": "ItemList",
+    numberOfItems: categorySites.length,
+    itemListElement: categorySites.map((site, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: site.name,
+      url: new URL(`/sites/${site.slug}/`, Astro.site).href
+    }))
+  }
+};
+---
+
+<BaseLayout
+  title={category.name}
+  description={category.description}
+  canonicalPath={`/categories/${category.slug}/`}
+  schema={schema}
+>
+  <div class="shell page-shell">
+    <Breadcrumbs items={[
+      { label: "Home", href: "/" },
+      { label: "Categories", href: "/categories/" },
+      { label: category.name }
+    ]} />
+    <header class="category-page-header">
+      <span class="category-icon category-icon-large" aria-hidden="true">{category.icon}</span>
+      <div>
+        <p class="eyebrow">Category · {categorySites.length} sites</p>
+        <h1>{category.name}</h1>
+        <p>{category.intro}</p>
+      </div>
+    </header>
+    <div class="ranked-list">
+      {categorySites.map((site, index) => <SiteCard site={site} position={index + 1} />)}
+    </div>
+    {categorySites.length === 0 && (
+      <div class="empty-state">
+        <h2>No entries yet</h2>
+        <p>This category is ready for reviewed catalog data.</p>
+      </div>
+    )}
+  </div>
+</BaseLayout>
+

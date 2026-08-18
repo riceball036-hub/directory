@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#0b0d12"/>
+  <circle cx="1040" cy="-10" r="330" fill="#8b73ff" opacity=".16"/>
+  <circle cx="1090" cy="610" r="250" fill="none" stroke="#a6ff4d" stroke-width="70" opacity=".12"/>
+  <rect x="88" y="86" width="90" height="90" rx="25" fill="#a6ff4d"/>
+  <path d="M115 108h20c18 0 30 10 30 23s-12 23-30 23h-20v-46Zm19 33c9 0 14-4 14-10s-5-10-14-10h-3v20h3Z" fill="#0b0d12"/>
+  <text x="88" y="315" fill="#f5f7fb" font-family="Arial, sans-serif" font-size="92" font-weight="800">Directory</text>
+  <text x="88" y="395" fill="#a6ff4d" font-family="Arial, sans-serif" font-size="43" font-weight="700">Find the right site. Skip the clutter.</text>
+  <text x="88" y="478" fill="#9da6b7" font-family="Arial, sans-serif" font-size="30">Independent reviews · Clear categories · Adults only</text>
+</svg>
+

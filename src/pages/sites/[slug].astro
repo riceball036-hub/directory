@@ -1,0 +1,125 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import SiteCard from "../../components/SiteCard.astro";
+import { categoryBySlug, getRelatedSites, sites } from "../../lib/catalog";
+import type { DirectorySite } from "../../types";
+
+export function getStaticPaths() {
+  return sites.map((site) => ({ params: { slug: site.slug }, props: { site } }));
+}
+
+interface Props {
+  site: DirectorySite;
+}
+
+const { site } = Astro.props;
+const relatedSites = getRelatedSites(site);
+const primaryCategory = categoryBySlug.get(site.categories[0]);
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Review",
+    name: `${site.name} directory review`,
+    reviewBody: site.review,
+    dateModified: site.verifiedAt,
+    itemReviewed: {
+      "@type": "WebSite",
+      name: site.name,
+      url: site.url
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: new URL("/", Astro.site).href },
+      { "@type": "ListItem", position: 2, name: primaryCategory?.name, item: new URL(`/categories/${primaryCategory?.slug}/`, Astro.site).href },
+      { "@type": "ListItem", position: 3, name: site.name }
+    ]
+  }
+];
+---
+
+<BaseLayout
+  title={`${site.name} review`}
+  description={site.description}
+  canonicalPath={`/sites/${site.slug}/`}
+  schema={schema}
+>
+  <div class="shell page-shell">
+    <Breadcrumbs items={[
+      { label: "Home", href: "/" },
+      { label: primaryCategory?.name || "Category", href: `/categories/${primaryCategory?.slug}/` },
+      { label: site.name }
+    ]} />
+    <article class="review-layout">
+      <header class="review-header">
+        <div class="review-logo" aria-hidden="true">{site.name.slice(0, 1).toUpperCase()}</div>
+        <div>
+          <div class="review-meta">
+            <span class={`price-chip price-${site.pricing.toLowerCase()}`}>{site.pricing}</span>
+            {site.demo && <span class="demo-chip">Demo entry</span>}
+          </div>
+          <h1>{site.name}</h1>
+          <p>{site.description}</p>
+        </div>
+      </header>
+
+      <div class="review-main">
+        <div class="prose-card">
+          <p class="eyebrow">Editorial overview</p>
+          <h2>What to know</h2>
+          <p>{site.review}</p>
+          <h2>Directory details</h2>
+          <dl class="fact-list">
+            <div><dt>Access</dt><dd>{site.pricing}</dd></div>
+            <div><dt>Last checked</dt><dd>{site.verifiedAt}</dd></div>
+            <div><dt>Categories</dt><dd>{site.categories.length}</dd></div>
+            <div><dt>Link type</dt><dd>{site.linkRel.includes("sponsored") ? "Commercial" : "Editorial"}</dd></div>
+          </dl>
+        </div>
+        <aside class="visit-card">
+          <span class="eyebrow">External destination</span>
+          <h2>{site.name}</h2>
+          <p>Confirm the destination's current terms, pricing, and availability before creating an account or paying.</p>
+          <a class="button button-primary button-full" href={site.url} target="_blank" rel={site.linkRel}>
+            Visit site <span aria-hidden="true">↗</span>
+          </a>
+          <small>Opens in a new tab</small>
+        </aside>
+      </div>
+
+      <section class="review-taxonomy">
+        <div>
+          <p class="eyebrow">Listed in</p>
+          <div class="link-pills">
+            {site.categories.map((slug) => {
+              const category = categoryBySlug.get(slug);
+              return category && <a href={`/categories/${slug}/`}>{category.name}</a>;
+            })}
+          </div>
+        </div>
+        <div>
+          <p class="eyebrow">Tags</p>
+          <ul class="tag-list">{site.tags.map((tag) => <li>{tag}</li>)}</ul>
+        </div>
+      </section>
+    </article>
+
+    {relatedSites.length > 0 && (
+      <section class="related-section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Keep browsing</p>
+            <h2>Related entries</h2>
+          </div>
+        </div>
+        <div class="related-grid">
+          {relatedSites.map((related) => <SiteCard site={related} compact />)}
+        </div>
+      </section>
+    )}
+  </div>
+</BaseLayout>
+

@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+---
+
+<BaseLayout title="About the directory" description="How the directory organizes, reviews, and labels adult websites.">
+  <div class="shell page-shell">
+    <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "About" }]} />
+    <header class="page-header page-header-narrow">
+      <p class="eyebrow">Editorial method</p>
+      <h1>A useful index needs more than a long list.</h1>
+      <p>The framework separates catalog facts, editorial notes, category placement, and commercial link labels so every part can be checked independently.</p>
+    </header>
+    <div class="method-grid">
+      <section><span>01</span><h2>Confirm the destination</h2><p>Check the official URL, access model, device support, account requirements, and regional availability.</p></section>
+      <section><span>02</span><h2>Write original notes</h2><p>Describe the actual experience in plain language. Do not copy marketing claims or another directory's review.</p></section>
+      <section><span>03</span><h2>Classify deliberately</h2><p>Use the smallest set of relevant categories and practical tags. Avoid attaching every possible keyword.</p></section>
+      <section><span>04</span><h2>Review the relationship</h2><p>Mark paid placements and affiliate links accurately. Editorial ordering and commercial relationships should remain distinguishable.</p></section>
+    </div>
+    <section class="prose-card prose-card-wide">
+      <h2>Ranking model</h2>
+      <p>Each category has its own integer rank. A production ranking can combine catalog quality, usability, mobile experience, advertising load, privacy controls, availability, and the date of the latest manual check. Do not claim mathematical precision unless the underlying scoring data is published.</p>
+      <h2>Corrections</h2>
+      <p>Store the latest verification date on every listing. When facts change, update the data record and the editorial review together so cards, detail pages, search, and the sitemap remain synchronized.</p>
+    </section>
+  </div>
+</BaseLayout>
+

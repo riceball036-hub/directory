@@ -1,0 +1,79 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CategorySection from "../components/CategorySection.astro";
+import { categories, sites } from "../lib/catalog";
+---
+
+<BaseLayout>
+  <section class="hero">
+    <div class="shell hero-grid">
+      <div>
+        <p class="eyebrow">Independent adult directory</p>
+        <h1>Find the right site.<br /><span>Skip the clutter.</span></h1>
+        <p class="hero-copy">
+          Browse concise reviews, practical tags, and organized categories built to make a large catalog easy to scan.
+        </p>
+        <form class="hero-search" action="/search/" method="get" role="search">
+          <label class="sr-only" for="home-search">Search the directory</label>
+          <input id="home-search" name="q" type="search" placeholder={`Search ${sites.length} directory entries`} autocomplete="off" />
+          <button type="submit">Search</button>
+        </form>
+        <div class="hero-stats" aria-label="Directory statistics">
+          <span><strong>{sites.length}</strong> reviewed entries</span>
+          <span><strong>{categories.length}</strong> clear categories</span>
+          <span><strong>0</strong> pop-ups</span>
+        </div>
+      </div>
+      <aside class="hero-panel" aria-label="Directory principles">
+        <p class="panel-index">INDEX / 01</p>
+        <h2>Built for quick decisions</h2>
+        <ul>
+          <li><span>01</span> Original editorial notes</li>
+          <li><span>02</span> Transparent category placement</li>
+          <li><span>03</span> Visible access and pricing labels</li>
+          <li><span>04</span> Mobile-first, low-friction browsing</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="category-jump" aria-labelledby="browse-title">
+    <div class="shell">
+      <div class="section-heading section-heading-wide">
+        <div>
+          <p class="eyebrow">Browse the index</p>
+          <h2 id="browse-title">Choose a category</h2>
+        </div>
+        <a class="text-link" href="/categories/">View category index</a>
+      </div>
+      <div class="category-chip-rail">
+        {categories.map((category) => (
+          <a href={`/categories/${category.slug}/`}>
+            <span aria-hidden="true">{category.icon}</span>
+            <strong>{category.shortName}</strong>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div class="shell directory-sections">
+    {categories.map((category) => <CategorySection category={category} />)}
+  </div>
+
+  <section class="editorial-note">
+    <div class="shell editorial-grid">
+      <div>
+        <p class="eyebrow">How the index works</p>
+        <h2>Useful context before every outbound click.</h2>
+      </div>
+      <div>
+        <p>
+          Listings are designed around practical facts: what a platform offers, how access works, which devices it supports, and what a visitor should verify independently.
+        </p>
+        <a class="button button-outline" href="/about/">Read the editorial method</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+

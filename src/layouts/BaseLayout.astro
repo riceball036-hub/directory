@@ -1,0 +1,86 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import AgeGate from "../components/AgeGate.astro";
+import { siteConfig } from "../config";
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+  image?: string;
+  noindex?: boolean;
+  schema?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+  title,
+  description = siteConfig.description,
+  canonicalPath = Astro.url.pathname,
+  image = "/social-card.svg",
+  noindex = false,
+  schema
+} = Astro.props;
+
+const pageTitle = title ? `${title} | ${siteConfig.name}` : siteConfig.name;
+const canonicalURL = new URL(canonicalPath, Astro.site);
+const imageURL = new URL(image, Astro.site);
+const baseSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: siteConfig.name,
+  url: new URL("/", Astro.site).href,
+  description: siteConfig.description,
+  potentialAction: {
+    "@type": "SearchAction",
+    target: `${new URL("/search/", Astro.site).href}?q={search_term_string}`,
+    "query-input": "required name=search_term_string"
+  }
+};
+---
+
+<!doctype html>
+<html lang={siteConfig.locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0b0d12" />
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex,follow" />}
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteConfig.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={imageURL} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageURL} />
+    <title>{pageTitle}</title>
+    <link rel="stylesheet" href="/styles/global.css" />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(baseSchema)} />
+    {schema && <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />}
+    <script is:inline src="/scripts/main.js" defer></script>
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <Header />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+    <AgeGate />
+    <button class="back-to-top" type="button" aria-label="Back to top" data-back-to-top>
+      <svg viewBox="0 0 44 44" aria-hidden="true">
+        <circle cx="22" cy="22" r="19"></circle>
+        <path d="m15 24 7-7 7 7"></path>
+      </svg>
+    </button>
+  </body>
+</html>

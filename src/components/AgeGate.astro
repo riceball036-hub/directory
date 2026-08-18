@@ -1,0 +1,15 @@
+---
+import { siteConfig } from "../config";
+---
+
+<dialog class="age-gate" data-age-gate aria-labelledby="age-gate-title">
+  <div class="age-gate-mark" aria-hidden="true">18+</div>
+  <h2 id="age-gate-title">Adults only</h2>
+  <p>{siteConfig.legalNotice}</p>
+  <div class="age-gate-actions">
+    <button class="button button-primary" type="button" data-age-confirm>Enter directory</button>
+    <button class="button button-quiet" type="button" data-age-exit>Leave</button>
+  </div>
+  <small>Your confirmation is stored only in this browser.</small>
+</dialog>
+

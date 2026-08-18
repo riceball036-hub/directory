@@ -1,0 +1,75 @@
+[
+  {
+    "slug": "free-video-sites",
+    "name": "Free Video Sites",
+    "shortName": "Free Video",
+    "description": "Large streaming libraries with free access and straightforward browsing.",
+    "intro": "Browse free video platforms using concise editorial notes, format tags, and a transparent ordering system. Review each destination's current terms and regional availability before visiting.",
+    "icon": "▶",
+    "order": 1
+  },
+  {
+    "slug": "premium-memberships",
+    "name": "Premium Membership Sites",
+    "shortName": "Premium",
+    "description": "Subscription services focused on exclusive libraries and higher-quality playback.",
+    "intro": "Compare membership-focused platforms by catalog style, access model, and the features described in each entry. Prices and availability should be verified at the destination.",
+    "icon": "◆",
+    "order": 2
+  },
+  {
+    "slug": "live-cams",
+    "name": "Live Cam Platforms",
+    "shortName": "Live Cams",
+    "description": "Live, interactive platforms organized by format and access model.",
+    "intro": "Explore live platforms with clear labels for free browsing, credit-based features, and account requirements. Each listing is designed to explain the service before an outbound visit.",
+    "icon": "●",
+    "order": 3
+  },
+  {
+    "slug": "creator-platforms",
+    "name": "Creator Platforms",
+    "shortName": "Creators",
+    "description": "Direct-to-fan services featuring independent creators and subscriptions.",
+    "intro": "Find creator-led platforms and understand their basic publishing and membership models. Individual creator availability changes frequently, so listings focus on the platform itself.",
+    "icon": "✦",
+    "order": 4
+  },
+  {
+    "slug": "vr-interactive",
+    "name": "VR & Interactive",
+    "shortName": "VR",
+    "description": "Immersive and interactive services for compatible devices.",
+    "intro": "Compare immersive services by device support, delivery format, and access model. Confirm hardware requirements and regional compatibility before purchasing.",
+    "icon": "◉",
+    "order": 5
+  },
+  {
+    "slug": "stories-audio",
+    "name": "Stories & Audio",
+    "shortName": "Stories",
+    "description": "Text and audio-focused destinations with community and premium options.",
+    "intro": "Discover text-first and audio-first platforms without relying on image-heavy browsing. Entries can be filtered by format, pricing, and community features.",
+    "icon": "¶",
+    "order": 6
+  },
+  {
+    "slug": "dating-communities",
+    "name": "Dating & Communities",
+    "shortName": "Communities",
+    "description": "Adult-oriented dating, discussion, and social discovery services.",
+    "intro": "Review community and dating services with attention to registration, pricing, and geographic reach. Users should protect personal information and independently verify profiles.",
+    "icon": "◎",
+    "order": 7
+  },
+  {
+    "slug": "inclusive-sites",
+    "name": "Inclusive & LGBTQ+ Sites",
+    "shortName": "Inclusive",
+    "description": "Platforms with broad, inclusive catalogs and community-focused discovery.",
+    "intro": "Browse inclusive platforms through neutral editorial summaries and practical format tags. Category placement can overlap where a site serves several audiences.",
+    "icon": "◇",
+    "order": 8
+  }
+]
+

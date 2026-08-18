@@ -1,0 +1,39 @@
+---
+import SiteCard from "./SiteCard.astro";
+import { getCategorySites } from "../lib/catalog";
+import { siteConfig } from "../config";
+import type { Category } from "../types";
+
+interface Props {
+  category: Category;
+}
+
+const { category } = Astro.props;
+const categorySites = getCategorySites(category.slug);
+const visibleSites = categorySites.slice(0, siteConfig.maxHomeSitesPerCategory);
+---
+
+<section class="category-section" aria-labelledby={`category-${category.slug}`}>
+  <div class="section-heading">
+    <div class="category-title-lockup">
+      <span class="category-icon" aria-hidden="true">{category.icon}</span>
+      <div>
+        <p class="eyebrow">Curated category</p>
+        <h2 id={`category-${category.slug}`}>
+          <a href={`/categories/${category.slug}/`}>{category.name}</a>
+        </h2>
+      </div>
+    </div>
+    <span class="count-label">{categorySites.length} {categorySites.length === 1 ? "site" : "sites"}</span>
+  </div>
+  <p class="section-description">{category.description}</p>
+  <div class="site-rail" tabindex="0" aria-label={`${category.name} sites`}>
+    {visibleSites.map((site, index) => (
+      <SiteCard site={site} position={index + 1} compact />
+    ))}
+  </div>
+  <a class="see-all-link" href={`/categories/${category.slug}/`}>
+    See all {categorySites.length} {category.name.toLowerCase()} <span aria-hidden="true">→</span>
+  </a>
+</section>
+

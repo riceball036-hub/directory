@@ -1,0 +1,25 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+---
+
+<BaseLayout title="Search" description="Search directory entries by name, category, or feature." noindex>
+  <div class="shell page-shell search-page">
+    <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Search" }]} />
+    <header class="page-header">
+      <p class="eyebrow">Find an entry</p>
+      <h1>Search the directory</h1>
+      <p>Search by site name, category, feature, or access model.</p>
+    </header>
+    <form class="directory-search" role="search" data-search-form>
+      <label for="directory-search-input">Search term</label>
+      <div>
+        <input id="directory-search-input" type="search" name="q" placeholder="Try “live”, “VR”, or a site name" autocomplete="off" data-search-input />
+        <button type="submit">Search</button>
+      </div>
+    </form>
+    <p class="search-status" role="status" aria-live="polite" data-search-status>Enter a term to search the catalog.</p>
+    <div class="search-results" data-search-results></div>
+  </div>
+  <script is:inline src="/scripts/search.js" defer></script>
+</BaseLayout>
