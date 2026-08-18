@@ -6,7 +6,6 @@ export const prerender = true;
 export function GET({ site }: { site: URL }) {
   const paths = [
     "/",
-    "/categories/",
     "/about/",
     "/legal/terms/",
     "/legal/privacy/",

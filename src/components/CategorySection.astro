@@ -1,5 +1,6 @@
 ---
 import SiteCard from "./SiteCard.astro";
+import CategoryIcon from "./CategoryIcon.astro";
 import { getCategorySites } from "../lib/catalog";
 import { siteConfig } from "../config";
 import { withBase } from "../lib/urls";
@@ -16,7 +17,7 @@ const visibleSites = categorySites.slice(0, siteConfig.maxHomeSitesPerCategory);
 
 <section class="category-section" aria-labelledby={`category-${category.slug}`}>
   <header class="category-heading">
-    <span class="category-icon" aria-hidden="true">{category.icon}</span>
+    <span class="category-icon" aria-hidden="true"><CategoryIcon slug={category.slug} /></span>
     <div class="category-title-copy">
       <h2 id={`category-${category.slug}`}>
         <a href={withBase(`/categories/${category.slug}/`)}>{category.name}</a>

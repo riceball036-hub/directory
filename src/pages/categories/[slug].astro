@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import CategoryIcon from "../../components/CategoryIcon.astro";
 import SiteCard from "../../components/SiteCard.astro";
 import { categories, getCategorySites } from "../../lib/catalog";
 import { withBase } from "../../lib/urls";
@@ -47,11 +48,10 @@ const schema = {
   <div class="shell page-shell">
     <Breadcrumbs items={[
       { label: "Home", href: "/" },
-      { label: "Categories", href: "/categories/" },
       { label: category.name }
     ]} />
     <header class="category-page-header">
-      <span class="category-icon category-icon-large" aria-hidden="true">{category.icon}</span>
+      <span class="category-icon category-icon-large" aria-hidden="true"><CategoryIcon slug={category.slug} /></span>
       <div>
         <p class="eyebrow">Category · {categorySites.length} sites</p>
         <h1>{category.name}</h1>
