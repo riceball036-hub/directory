@@ -22,7 +22,6 @@ const visibleSites = categorySites.slice(0, siteConfig.maxHomeSitesPerCategory);
       <h2 id={`category-${category.slug}`}>
         <a href={withBase(`/categories/${category.slug}/`)}>{category.name}</a>
       </h2>
-      <span class="count-label">{categorySites.length} {categorySites.length === 1 ? "site" : "sites"}</span>
     </div>
   </header>
   <p class="section-description">{category.description}</p>
@@ -32,6 +31,7 @@ const visibleSites = categorySites.slice(0, siteConfig.maxHomeSitesPerCategory);
     ))}
   </div>
   <a class="see-all-link" href={withBase(`/categories/${category.slug}/`)}>
-    All {category.shortName} sites <span aria-hidden="true">→</span>
+    Explore all {categorySites.length} {categorySites.length === 1 ? "site" : "sites"}
+    <span aria-hidden="true">→</span>
   </a>
 </section>

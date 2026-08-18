@@ -65,7 +65,7 @@ const baseSchema = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageURL} />
     <title>{pageTitle}</title>
-    <link rel="stylesheet" href={`${withBase("/styles/global.css")}?v=5`} />
+    <link rel="stylesheet" href={`${withBase("/styles/global.css")}?v=6`} />
     <script is:inline type="application/ld+json" set:html={JSON.stringify(baseSchema)} />
     {schema && <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />}
     <script is:inline src={withBase("/scripts/main.js")} defer></script>

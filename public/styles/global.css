@@ -42,8 +42,11 @@ body {
   color: var(--ink);
   background: var(--bg);
   font-family: "Atkinson Hyperlegible", "Segoe UI", Arial, sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: 16.5px;
+  line-height: 1.62;
+  letter-spacing: 0.002em;
+  font-kerning: normal;
+  font-synthesis: none;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -125,7 +128,7 @@ input:focus-visible {
   color: var(--muted);
   font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.09em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 .primary-nav { display: flex; align-items: center; gap: 29px; }
@@ -178,17 +181,18 @@ input:focus-visible {
 .intro-copy h1 {
   margin: 0 0 10px;
   color: var(--ink);
-  font-size: clamp(2.6rem, 4.3vw, 3.55rem);
+  font-size: clamp(2.55rem, 4.1vw, 3.45rem);
   font-weight: 700;
-  line-height: 1.02;
-  letter-spacing: -0.052em;
+  line-height: 1.06;
+  letter-spacing: -0.038em;
+  text-wrap: balance;
 }
 .intro-copy > p:last-child {
   max-width: 720px;
   margin: 0;
   color: var(--ink-soft);
-  font-size: 1.08rem;
-  line-height: 1.55;
+  font-size: 1.06rem;
+  line-height: 1.62;
 }
 .hero-search {
   display: flex;
@@ -204,7 +208,7 @@ input:focus-visible {
   min-width: 0;
   flex: 1;
   padding: 11px 14px;
-  font-size: 1rem;
+  font-size: 1.02rem;
   color: var(--ink);
   background: transparent;
   border: 0;
@@ -239,7 +243,7 @@ input:focus-visible {
   font-size: clamp(1.8rem, 3vw, 2.35rem);
   font-weight: 700;
   line-height: 1.1;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.026em;
 }
 .directory-heading > p:last-child {
   margin: 5px 0 0;
@@ -262,7 +266,7 @@ input:focus-visible {
 .category-section {
   display: flex;
   min-width: 0;
-  min-height: 368px;
+  min-height: 362px;
   flex-direction: column;
   padding: 0;
   background: var(--surface);
@@ -281,25 +285,26 @@ input:focus-visible {
   display: flex;
   align-items: center;
   gap: 12px;
-  min-height: 80px;
+  min-height: 76px;
   padding: 15px 17px;
   color: #fff;
   background: var(--panel);
-  border-bottom: 3px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
 }
 .category-title-copy { min-width: 0; }
 .category-heading h2 {
   margin: 0;
-  font-size: 1.12rem;
+  font-size: 1.08rem;
   font-weight: 700;
-  line-height: 1.22;
-  letter-spacing: -0.02em;
+  line-height: 1.26;
+  letter-spacing: 0;
+  text-wrap: balance;
 }
 .category-heading h2 a:hover { color: #f27890; }
 .category-icon {
   display: grid;
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   flex: 0 0 auto;
   place-items: center;
   color: #f2748c;
@@ -307,18 +312,7 @@ input:focus-visible {
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 9px;
 }
-.category-svg { width: 22px; height: 22px; }
-.count-label {
-  display: block;
-  margin-top: 2px;
-  color: var(--muted);
-  font-size: 0.69rem;
-  font-weight: 700;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-.category-heading .count-label { color: #bdb3b7; }
+.category-svg { width: 21px; height: 21px; }
 .section-description {
   display: flex;
   min-height: 90px;
@@ -327,8 +321,8 @@ input:focus-visible {
   padding: 14px 16px;
   color: var(--muted);
   background: #fcfbfa;
-  font-size: 0.94rem;
-  line-height: 1.52;
+  font-size: 0.93rem;
+  line-height: 1.58;
 }
 .site-list { border-top: 1px solid var(--line); }
 
@@ -419,7 +413,7 @@ input:focus-visible {
 .directory-sections .site-card-compact .site-name-line {
   display: grid;
   grid-template-columns: 30px minmax(0, 1fr) 30px;
-  min-height: 49px;
+  min-height: 50px;
   align-items: center;
   gap: 7px;
   padding: 0 14px;
@@ -440,9 +434,9 @@ input:focus-visible {
   min-width: 0;
   overflow: hidden;
   color: var(--link);
-  font-size: 0.98rem;
+  font-size: 0.96rem;
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.28;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -475,7 +469,7 @@ input:focus-visible {
   align-self: stretch;
   justify-content: center;
   gap: 6px;
-  min-height: 48px;
+  min-height: 50px;
   padding: 10px 14px;
   margin-top: auto;
   color: var(--accent-dark);
@@ -483,10 +477,12 @@ input:focus-visible {
   border: 0;
   border-top: 1px solid var(--line);
   border-radius: 0;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 700;
+  letter-spacing: 0.005em;
 }
-.see-all-link span { font-size: 0.95rem; }
+.see-all-link span { margin-left: 2px; font-size: 0.95rem; transition: transform .2s ease; }
+.see-all-link:hover span { transform: translateX(2px); }
 .see-all-link:hover { background: var(--accent-soft); }
 .button {
   display: inline-flex;
