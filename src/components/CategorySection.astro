@@ -15,18 +15,13 @@ const visibleSites = categorySites.slice(0, siteConfig.maxHomeSitesPerCategory);
 ---
 
 <section class="category-section" aria-labelledby={`category-${category.slug}`}>
-  <div class="section-heading">
-    <div class="category-title-lockup">
+  <header class="category-heading">
+    <h2 id={`category-${category.slug}`}>
       <span class="category-icon" aria-hidden="true">{category.icon}</span>
-      <div>
-        <p class="eyebrow">Curated category</p>
-        <h2 id={`category-${category.slug}`}>
-          <a href={withBase(`/categories/${category.slug}/`)}>{category.name}</a>
-        </h2>
-      </div>
-    </div>
+      <a href={withBase(`/categories/${category.slug}/`)}>{category.name}</a>
+    </h2>
     <span class="count-label">{categorySites.length} {categorySites.length === 1 ? "site" : "sites"}</span>
-  </div>
+  </header>
   <p class="section-description">{category.description}</p>
   <div class="site-list" aria-label={`${category.name} sites`}>
     {visibleSites.map((site, index) => (
@@ -34,6 +29,6 @@ const visibleSites = categorySites.slice(0, siteConfig.maxHomeSitesPerCategory);
     ))}
   </div>
   <a class="see-all-link" href={withBase(`/categories/${category.slug}/`)}>
-    See all {categorySites.length} {category.name.toLowerCase()} <span aria-hidden="true">→</span>
+    View all {category.name.toLowerCase()} <span aria-hidden="true">→</span>
   </a>
 </section>
