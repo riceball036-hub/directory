@@ -27,7 +27,7 @@ const visibleSites = categorySites.slice(0, siteConfig.maxHomeSitesPerCategory);
     <span class="count-label">{categorySites.length} {categorySites.length === 1 ? "site" : "sites"}</span>
   </div>
   <p class="section-description">{category.description}</p>
-  <div class="site-rail" tabindex="0" aria-label={`${category.name} sites`}>
+  <div class="site-list" aria-label={`${category.name} sites`}>
     {visibleSites.map((site, index) => (
       <SiteCard site={site} position={index + 1} compact />
     ))}
@@ -36,4 +36,3 @@ const visibleSites = categorySites.slice(0, siteConfig.maxHomeSitesPerCategory);
     See all {categorySites.length} {category.name.toLowerCase()} <span aria-hidden="true">→</span>
   </a>
 </section>
-

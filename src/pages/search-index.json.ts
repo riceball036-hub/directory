@@ -7,6 +7,8 @@ export function GET() {
   const payload = sites.map((site) => ({
     slug: site.slug,
     name: site.name,
+    url: site.url,
+    linkRel: site.linkRel,
     description: site.description,
     pricing: site.pricing,
     tags: site.tags,
@@ -20,4 +22,3 @@ export function GET() {
     }
   });
 }
-

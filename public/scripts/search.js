@@ -2,6 +2,8 @@
  * @typedef {object} SearchEntry
  * @property {string} slug
  * @property {string} name
+ * @property {string} url
+ * @property {string} linkRel
  * @property {string} description
  * @property {string} pricing
  * @property {string[]} tags
@@ -92,11 +94,14 @@ if (
         <article class="search-result">
           <div>
             <span class="price-chip price-${entry.pricing.toLowerCase()}">${escapeHtml(entry.pricing)}</span>
-            <h2><a href="/sites/${encodeURIComponent(entry.slug)}/">${escapeHtml(entry.name)}</a></h2>
+            <h2 class="search-result-title">
+              <a href="${escapeHtml(entry.url)}" target="_blank" rel="${escapeHtml(entry.linkRel)}">${escapeHtml(entry.name)} ↗</a>
+              <a class="review-mini" href="/sites/${encodeURIComponent(entry.slug)}/">Review</a>
+            </h2>
             <p>${escapeHtml(entry.description)}</p>
             <small>${entry.categories.map(escapeHtml).join(" · ")}</small>
           </div>
-          <a class="text-link" href="/sites/${encodeURIComponent(entry.slug)}/">Read review →</a>
+          <a class="outbound-link" href="${escapeHtml(entry.url)}" target="_blank" rel="${escapeHtml(entry.linkRel)}">Visit site →</a>
         </article>
       `).join("");
     } catch {

@@ -14,25 +14,20 @@ const primaryCategory = categoryBySlug.get(site.categories[0]);
 ---
 
 <article class:list={["site-card", compact && "site-card-compact"]} data-site-card>
-  <div class="site-rank" aria-label={position ? `Position ${position}` : undefined}>
-    {position ? String(position).padStart(2, "0") : initial}
-  </div>
+  <div class="site-rank" aria-label={position ? `Position ${position}` : undefined}>{position || "•"}</div>
+  <div class="site-logo" aria-hidden="true">{initial}</div>
   <div class="site-card-body">
-    <div class="site-card-topline">
+    <div class="site-name-line">
+      <a class="site-direct-link" href={site.url} target="_blank" rel={site.linkRel}>
+        {site.name} <span aria-hidden="true">↗</span>
+      </a>
+      <a class="review-mini" href={`/sites/${site.slug}/`} aria-label={`Read ${site.name} review`}>Review</a>
+    </div>
+    <p>{site.description}</p>
+    <div class="site-row-meta">
       <span>{primaryCategory?.shortName}</span>
       <span class:list={["price-chip", `price-${site.pricing.toLowerCase()}`]}>{site.pricing}</span>
-    </div>
-    <h3><a href={`/sites/${site.slug}/`}>{site.name}</a></h3>
-    <p>{site.description}</p>
-    <ul class="tag-list" aria-label="Features">
-      {site.tags.slice(0, compact ? 2 : 3).map((tag) => <li>{tag}</li>)}
-    </ul>
-    <div class="site-card-actions">
-      <a class="text-link" href={`/sites/${site.slug}/`}>Read review</a>
-      <a class="outbound-link" href={site.url} target="_blank" rel={site.linkRel}>
-        Visit site <span aria-hidden="true">↗</span>
-      </a>
+      {!compact && site.tags.slice(0, 2).map((tag) => <span>{tag}</span>)}
     </div>
   </div>
 </article>
-
