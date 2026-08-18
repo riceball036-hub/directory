@@ -27,9 +27,9 @@ import { withBase } from "../lib/urls";
       </div>
       <aside class="hero-panel" aria-label="Directory principles">
         <p class="panel-index">QUICK DIRECTORY</p>
-        <h2>No giant cards. No dark maze.</h2>
+        <h2>A fast index, not a wall of cards.</h2>
         <ul>
-          <li><span>01</span> Categories stacked in one clear flow</li>
+          <li><span>01</span> Four category columns on desktop</li>
           <li><span>02</span> Direct website links by default</li>
           <li><span>03</span> Small optional review buttons</li>
           <li><span>04</span> Fast on desktop and mobile</li>
@@ -58,9 +58,20 @@ import { withBase } from "../lib/urls";
     </div>
   </section>
 
-  <div class="shell directory-sections">
-    {categories.map((category) => <CategorySection category={category} />)}
-  </div>
+  <section class="directory-browser" aria-labelledby="directory-title">
+    <div class="shell">
+      <header class="directory-heading">
+        <div>
+          <p class="eyebrow">Main directory</p>
+          <h2 id="directory-title">Browse every category</h2>
+        </div>
+        <p>Scan four categories at a glance, visit a site directly, or open a short review when you want more detail.</p>
+      </header>
+      <div class="directory-sections">
+        {categories.map((category) => <CategorySection category={category} />)}
+      </div>
+    </div>
+  </section>
 
   <section class="editorial-note">
     <div class="shell editorial-grid">
