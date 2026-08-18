@@ -15,20 +15,34 @@ const primaryCategory = categoryBySlug.get(site.categories[0]);
 ---
 
 <article class:list={["site-card", compact && "site-card-compact"]} data-site-card>
-  <div class="site-rank" aria-label={position ? `Position ${position}` : undefined}>{position || "•"}</div>
-  <div class="site-logo" aria-hidden="true">{initial}</div>
-  <div class="site-card-body">
-    <div class="site-name-line">
-      <a class="site-direct-link" href={site.url} target="_blank" rel={site.linkRel}>
-        {site.name} <span aria-hidden="true">↗</span>
-      </a>
-      <a class="review-mini" href={withBase(`/sites/${site.slug}/`)} aria-label={`Read ${site.name} review`}>Review</a>
+  {compact ? (
+    <div class="site-card-body">
+      <div class="site-name-line">
+        <a class="site-direct-link" href={site.url} target="_blank" rel={site.linkRel}>
+          {site.name} <span aria-hidden="true">↗</span>
+        </a>
+        <a class="review-mini" href={withBase(`/sites/${site.slug}/`)} aria-label={`Read ${site.name} review`}>Review</a>
+      </div>
+      <p>{site.description}</p>
     </div>
-    <p>{site.description}</p>
-    <div class="site-row-meta">
-      <span>{primaryCategory?.shortName}</span>
-      <span class:list={["price-chip", `price-${site.pricing.toLowerCase()}`]}>{site.pricing}</span>
-      {!compact && site.tags.slice(0, 2).map((tag) => <span>{tag}</span>)}
-    </div>
-  </div>
+  ) : (
+    <>
+      <div class="site-rank" aria-label={position ? `Position ${position}` : undefined}>{position || "•"}</div>
+      <div class="site-logo" aria-hidden="true">{initial}</div>
+      <div class="site-card-body">
+        <div class="site-name-line">
+          <a class="site-direct-link" href={site.url} target="_blank" rel={site.linkRel}>
+            {site.name} <span aria-hidden="true">↗</span>
+          </a>
+          <a class="review-mini" href={withBase(`/sites/${site.slug}/`)} aria-label={`Read ${site.name} review`}>Review</a>
+        </div>
+        <p>{site.description}</p>
+        <div class="site-row-meta">
+          <span>{primaryCategory?.shortName}</span>
+          <span class:list={["price-chip", `price-${site.pricing.toLowerCase()}`]}>{site.pricing}</span>
+          {site.tags.slice(0, 2).map((tag) => <span>{tag}</span>)}
+        </div>
+      </div>
+    </>
+  )}
 </article>
