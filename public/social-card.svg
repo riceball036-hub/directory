@@ -1,10 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
-  <rect width="1200" height="630" fill="#f7f9fc"/>
-  <circle cx="1060" cy="0" r="330" fill="#54b8ff" opacity=".16"/>
-  <circle cx="1080" cy="610" r="250" fill="none" stroke="#ff6b57" stroke-width="70" opacity=".18"/>
-  <rect x="88" y="86" width="90" height="90" rx="25" fill="#ff6b57"/>
+  <rect width="1200" height="630" fill="#f4f3f1"/>
+  <circle cx="1080" cy="0" r="330" fill="#211c1f" opacity=".06"/>
+  <circle cx="1080" cy="610" r="250" fill="none" stroke="#c52b4b" stroke-width="70" opacity=".14"/>
+  <rect x="88" y="86" width="90" height="90" rx="22" fill="#211c1f"/>
+  <rect x="88" y="164" width="90" height="12" fill="#c52b4b"/>
   <path d="M115 108h20c18 0 30 10 30 23s-12 23-30 23h-20v-46Zm19 33c9 0 14-4 14-10s-5-10-14-10h-3v20h3Z" fill="#ffffff"/>
-  <text x="88" y="315" fill="#182033" font-family="Arial, sans-serif" font-size="92" font-weight="800">Directory</text>
-  <text x="88" y="395" fill="#ff6b57" font-family="Arial, sans-serif" font-size="43" font-weight="700">Adult sites, sorted. Click and explore.</text>
-  <text x="88" y="478" fill="#667085" font-family="Arial, sans-serif" font-size="30">Direct links · Optional reviews · Adults only</text>
+  <text x="88" y="315" fill="#181416" font-family="Arial, sans-serif" font-size="92" font-weight="700">Directory</text>
+  <text x="88" y="395" fill="#941b36" font-family="Arial, sans-serif" font-size="43" font-weight="700">Adult sites, sorted. Click and explore.</text>
+  <text x="88" y="478" fill="#696164" font-family="Arial, sans-serif" font-size="30">Direct links · Optional reviews · Adults only</text>
 </svg>
