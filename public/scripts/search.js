@@ -43,7 +43,7 @@ if (
 
   function getCatalog() {
     if (!catalogPromise) {
-      catalogPromise = fetch("/search-index.json").then(async (response) => {
+      catalogPromise = fetch(searchForm.dataset.searchIndex || "/search-index.json").then(async (response) => {
         if (!response.ok) throw new Error("Search index unavailable");
         return /** @type {Promise<SearchEntry[]>} */ (response.json());
       });
@@ -90,13 +90,14 @@ if (
         .slice(0, 100);
 
       searchStatus.textContent = `${matches.length} ${matches.length === 1 ? "result" : "results"} for “${rawQuery.trim()}”.`;
+      const baseUrl = (searchForm.dataset.baseUrl || "/").replace(/\/?$/, "/");
       searchResults.innerHTML = matches.map(({ entry }) => `
         <article class="search-result">
           <div>
             <span class="price-chip price-${entry.pricing.toLowerCase()}">${escapeHtml(entry.pricing)}</span>
             <h2 class="search-result-title">
               <a href="${escapeHtml(entry.url)}" target="_blank" rel="${escapeHtml(entry.linkRel)}">${escapeHtml(entry.name)} ↗</a>
-              <a class="review-mini" href="/sites/${encodeURIComponent(entry.slug)}/">Review</a>
+              <a class="review-mini" href="${escapeHtml(`${baseUrl}sites/${encodeURIComponent(entry.slug)}/`)}">Review</a>
             </h2>
             <p>${escapeHtml(entry.description)}</p>
             <small>${entry.categories.map(escapeHtml).join(" · ")}</small>

@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import { categories, getCategoryCount } from "../../lib/catalog";
+import { withBase } from "../../lib/urls";
 ---
 
 <BaseLayout title="All categories" description="Browse every category in the adult website directory.">
@@ -14,7 +15,7 @@ import { categories, getCategoryCount } from "../../lib/catalog";
     </header>
     <div class="category-grid">
       {categories.map((category) => (
-        <a class="category-tile" href={`/categories/${category.slug}/`}>
+        <a class="category-tile" href={withBase(`/categories/${category.slug}/`)}>
           <span class="category-icon" aria-hidden="true">{category.icon}</span>
           <div>
             <span class="count-label">{getCategoryCount(category.slug)} sites</span>
@@ -27,4 +28,3 @@ import { categories, getCategoryCount } from "../../lib/catalog";
     </div>
   </div>
 </BaseLayout>
-

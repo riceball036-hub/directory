@@ -1,25 +1,26 @@
 ---
 import { siteConfig } from "../config";
+import { withBase } from "../lib/urls";
 const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
   <div class="shell footer-grid">
     <div>
-      <a class="footer-brand" href="/">{siteConfig.name}</a>
+      <a class="footer-brand" href={withBase("/")}>{siteConfig.name}</a>
       <p>{siteConfig.description}</p>
     </div>
     <nav aria-label="Directory">
       <strong>Explore</strong>
-      <a href="/categories/">All categories</a>
-      <a href="/search/">Search the directory</a>
-      <a href="/about/">How rankings work</a>
+      <a href={withBase("/categories/")}>All categories</a>
+      <a href={withBase("/search/")}>Search the directory</a>
+      <a href={withBase("/about/")}>How rankings work</a>
     </nav>
     <nav aria-label="Legal">
       <strong>Information</strong>
-      <a href="/legal/terms/">Terms</a>
-      <a href="/legal/privacy/">Privacy</a>
-      <a href="/legal/copyright/">Copyright</a>
+      <a href={withBase("/legal/terms/")}>Terms</a>
+      <a href={withBase("/legal/privacy/")}>Privacy</a>
+      <a href={withBase("/legal/copyright/")}>Copyright</a>
     </nav>
   </div>
   <div class="shell footer-bottom">
@@ -27,4 +28,3 @@ const year = new Date().getFullYear();
     <span>Adults only · Independent directory</span>
   </div>
 </footer>
-

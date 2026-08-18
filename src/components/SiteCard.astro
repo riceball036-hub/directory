@@ -1,5 +1,6 @@
 ---
 import { categoryBySlug } from "../lib/catalog";
+import { withBase } from "../lib/urls";
 import type { DirectorySite } from "../types";
 
 interface Props {
@@ -21,7 +22,7 @@ const primaryCategory = categoryBySlug.get(site.categories[0]);
       <a class="site-direct-link" href={site.url} target="_blank" rel={site.linkRel}>
         {site.name} <span aria-hidden="true">↗</span>
       </a>
-      <a class="review-mini" href={`/sites/${site.slug}/`} aria-label={`Read ${site.name} review`}>Review</a>
+      <a class="review-mini" href={withBase(`/sites/${site.slug}/`)} aria-label={`Read ${site.name} review`}>Review</a>
     </div>
     <p>{site.description}</p>
     <div class="site-row-meta">

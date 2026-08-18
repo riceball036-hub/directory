@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CategorySection from "../components/CategorySection.astro";
 import { categories, sites } from "../lib/catalog";
+import { withBase } from "../lib/urls";
 ---
 
 <BaseLayout>
@@ -13,7 +14,7 @@ import { categories, sites } from "../lib/catalog";
         <p class="hero-copy">
           Find websites quickly through clear categories and compact ranked lists. Click a site name to visit it directly, or use the small Review button for our notes.
         </p>
-        <form class="hero-search" action="/search/" method="get" role="search">
+        <form class="hero-search" action={withBase("/search/")} method="get" role="search">
           <label class="sr-only" for="home-search">Search the directory</label>
           <input id="home-search" name="q" type="search" placeholder={`Search ${sites.length} directory entries`} autocomplete="off" />
           <button type="submit">Search</button>
@@ -44,11 +45,11 @@ import { categories, sites } from "../lib/catalog";
           <p class="eyebrow">Jump to a list</p>
           <h2 id="browse-title">Choose a category</h2>
         </div>
-        <a class="text-link" href="/categories/">View category index</a>
+        <a class="text-link" href={withBase("/categories/")}>View category index</a>
       </div>
       <div class="category-chip-rail">
         {categories.map((category) => (
-          <a href={`/categories/${category.slug}/`}>
+          <a href={withBase(`/categories/${category.slug}/`)}>
             <span aria-hidden="true">{category.icon}</span>
             <strong>{category.shortName}</strong>
           </a>
@@ -71,7 +72,7 @@ import { categories, sites } from "../lib/catalog";
         <p>
           Listings are designed around practical facts: what a platform offers, how access works, which devices it supports, and what a visitor should verify independently.
         </p>
-        <a class="button button-outline" href="/about/">Read the editorial method</a>
+        <a class="button button-outline" href={withBase("/about/")}>Read the editorial method</a>
       </div>
     </div>
   </section>

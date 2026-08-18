@@ -27,6 +27,7 @@ npm run dev
 ```
 
 Before production, set `SITE_URL` to the final HTTPS origin.
+Set `BASE_PATH` only when the site is hosted below a subpath, such as `/directory` on GitHub Pages.
 
 ## Commands
 
@@ -70,6 +71,16 @@ The importer matches category names to the existing category slugs and writes a 
 - Node.js: `22.12.0` or newer supported even-numbered release
 - Environment variable: `SITE_URL=https://your-domain.example`
 
+## GitHub Pages
+
+The included Pages workflow deploys every push to `main`. For this repository, the production values are:
+
+- Site origin: `https://riceball036-hub.github.io`
+- Base path: `/directory`
+- Public URL: `https://riceball036-hub.github.io/directory/`
+
+In the repository settings, select **Pages → Build and deployment → Source → GitHub Actions** once. Later pushes deploy automatically.
+
 ## Before launch
 
 1. Replace the working brand and contact address in `src/config.ts`.
@@ -79,4 +90,3 @@ The importer matches category names to the existing category slugs and writes a 
 5. Add only licensed logos or use text/initial marks.
 6. Decide which links are editorial, affiliate, or sponsored and set each record's `linkRel` accurately.
 7. Run the complete validation and build commands.
-

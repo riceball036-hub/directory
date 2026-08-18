@@ -1,13 +1,13 @@
 {
   "name": "Directory",
   "short_name": "DIR",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#f7f9fc",
   "theme_color": "#ff6b57",
   "icons": [
     {
-      "src": "/favicon.svg",
+      "src": "favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml"
     }

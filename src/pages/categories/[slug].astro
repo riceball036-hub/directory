@@ -3,6 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import SiteCard from "../../components/SiteCard.astro";
 import { categories, getCategorySites } from "../../lib/catalog";
+import { withBase } from "../../lib/urls";
 import type { Category } from "../../types";
 
 export function getStaticPaths() {
@@ -23,7 +24,7 @@ const schema = {
   "@type": "CollectionPage",
   name: category.name,
   description: category.description,
-  url: new URL(`/categories/${category.slug}/`, Astro.site).href,
+  url: new URL(withBase(`/categories/${category.slug}/`), Astro.site).href,
   mainEntity: {
     "@type": "ItemList",
     numberOfItems: categorySites.length,
@@ -31,7 +32,7 @@ const schema = {
       "@type": "ListItem",
       position: index + 1,
       name: site.name,
-      url: new URL(`/sites/${site.slug}/`, Astro.site).href
+      url: new URL(withBase(`/sites/${site.slug}/`), Astro.site).href
     }))
   }
 };
@@ -68,4 +69,3 @@ const schema = {
     )}
   </div>
 </BaseLayout>
-

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { withBase } from "../lib/urls";
 ---
 
 <BaseLayout title="Page not found" noindex>
@@ -8,9 +9,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <h1>This page is not in the index.</h1>
     <p>Return to the directory or browse all categories.</p>
     <div>
-      <a class="button button-primary" href="/">Go home</a>
-      <a class="button button-outline" href="/categories/">Browse categories</a>
+      <a class="button button-primary" href={withBase("/")}>Go home</a>
+      <a class="button button-outline" href={withBase("/categories/")}>Browse categories</a>
     </div>
   </div>
 </BaseLayout>
-
