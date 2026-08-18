@@ -18,12 +18,24 @@ const primaryCategory = categoryBySlug.get(site.categories[0]);
   {compact ? (
     <div class="site-card-body">
       <div class="site-name-line">
+        <span class="site-rank" aria-label={position ? `Position ${position}` : undefined}>
+          {position ? String(position).padStart(2, "0") : "•"}
+        </span>
         <a class="site-direct-link" href={site.url} target="_blank" rel={site.linkRel}>
           {site.name} <span aria-hidden="true">↗</span>
         </a>
-        <a class="review-mini" href={withBase(`/sites/${site.slug}/`)} aria-label={`Read ${site.name} review`}>Review</a>
+        <a
+          class="review-mini review-icon"
+          href={withBase(`/sites/${site.slug}/`)}
+          aria-label={`View ${site.name} details`}
+          title={`View ${site.name} details`}
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="8.5"></circle>
+            <path d="M12 10.8v5.1M12 7.7h.01"></path>
+          </svg>
+        </a>
       </div>
-      <p>{site.description}</p>
     </div>
   ) : (
     <>
