@@ -16,11 +16,13 @@ const visibleSites = categorySites.slice(0, siteConfig.maxHomeSitesPerCategory);
 
 <section class="category-section" aria-labelledby={`category-${category.slug}`}>
   <header class="category-heading">
-    <h2 id={`category-${category.slug}`}>
-      <span class="category-icon" aria-hidden="true">{category.icon}</span>
-      <a href={withBase(`/categories/${category.slug}/`)}>{category.name}</a>
-    </h2>
-    <span class="count-label">{categorySites.length} {categorySites.length === 1 ? "site" : "sites"}</span>
+    <span class="category-icon" aria-hidden="true">{category.icon}</span>
+    <div class="category-title-copy">
+      <h2 id={`category-${category.slug}`}>
+        <a href={withBase(`/categories/${category.slug}/`)}>{category.name}</a>
+      </h2>
+      <span class="count-label">{categorySites.length} {categorySites.length === 1 ? "site" : "sites"}</span>
+    </div>
   </header>
   <p class="section-description">{category.description}</p>
   <div class="site-list" aria-label={`${category.name} sites`}>
@@ -29,6 +31,6 @@ const visibleSites = categorySites.slice(0, siteConfig.maxHomeSitesPerCategory);
     ))}
   </div>
   <a class="see-all-link" href={withBase(`/categories/${category.slug}/`)}>
-    View full category <span aria-hidden="true">→</span>
+    All {category.shortName} sites <span aria-hidden="true">→</span>
   </a>
 </section>
