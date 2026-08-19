@@ -3,8 +3,8 @@
   "short_name": "DIR",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#f7f9fc",
-  "theme_color": "#ff6b57",
+  "background_color": "#f7f5f2",
+  "theme_color": "#9a5550",
   "icons": [
     {
       "src": "favicon.svg",

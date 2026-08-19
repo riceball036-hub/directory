@@ -9,9 +9,3 @@ export const siteConfig = {
   legalNotice:
     "This website is intended only for adults who are at least 18 years old or the age of majority in their location."
 } as const;
-
-export const navigation = [
-  { href: "/", label: "Home" },
-  { href: "/search/", label: "Search" },
-  { href: "/about/", label: "About" }
-] as const;

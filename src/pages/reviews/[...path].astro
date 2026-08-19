@@ -1,0 +1,159 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import { categoryBySlug, sites } from "../../lib/catalog";
+import { withBase } from "../../lib/urls";
+import type { DirectorySite } from "../../types";
+
+const PAGE_SIZE = 6;
+
+const sortOptions = [
+  { id: "featured", label: "Featured order" },
+  { id: "name-asc", label: "Name A–Z" },
+  { id: "name-desc", label: "Name Z–A" },
+  { id: "access", label: "Access type" }
+] as const;
+
+type SortId = (typeof sortOptions)[number]["id"];
+
+function reviewPath(sortId: SortId, pageNumber: number) {
+  const sortPrefix = sortId === "featured" ? "" : `${sortId}/`;
+  const pageSuffix = pageNumber === 1 ? "" : `${pageNumber}/`;
+  return `/reviews/${sortPrefix}${pageSuffix}`;
+}
+
+export function getStaticPaths() {
+  const pageSize = 6;
+  const pathSortIds: SortId[] = ["featured", "name-asc", "name-desc", "access"];
+  const pathPriceOrder = { Free: 0, Freemium: 1, Premium: 2 } as const;
+  const sortForPath = (sortId: SortId) => [...sites].sort((a, b) => {
+    if (sortId === "name-asc") return a.name.localeCompare(b.name);
+    if (sortId === "name-desc") return b.name.localeCompare(a.name);
+    if (sortId === "access") {
+      return pathPriceOrder[a.pricing] - pathPriceOrder[b.pricing] || a.name.localeCompare(b.name);
+    }
+    return Number(b.featured) - Number(a.featured) || a.rank - b.rank || a.name.localeCompare(b.name);
+  });
+  const pathForPage = (sortId: SortId, pageNumber: number) => {
+    const sortPrefix = sortId === "featured" ? "" : `${sortId}/`;
+    const pageSuffix = pageNumber === 1 ? "" : `${pageNumber}/`;
+    return `/reviews/${sortPrefix}${pageSuffix}`;
+  };
+
+  return pathSortIds.flatMap((id) => {
+    const orderedSites = sortForPath(id);
+    const totalPages = Math.ceil(orderedSites.length / pageSize);
+    return Array.from({ length: totalPages }, (_, index) => {
+      const currentPage = index + 1;
+      const path = pathForPage(id, currentPage).replace(/^\/reviews\/?|\/$/g, "") || undefined;
+      return {
+        params: { path },
+        props: {
+          entries: orderedSites.slice(index * pageSize, currentPage * pageSize),
+          currentPage,
+          totalPages,
+          sortId: id
+        }
+      };
+    });
+  });
+}
+
+interface Props {
+  entries: DirectorySite[];
+  currentPage: number;
+  totalPages: number;
+  sortId: SortId;
+}
+
+const { entries, currentPage, totalPages, sortId } = Astro.props;
+const currentSort = sortOptions.find((option) => option.id === sortId) || sortOptions[0];
+const canonicalPath = reviewPath(sortId, currentPage);
+const pageTitle = currentPage > 1 ? `Website reviews — page ${currentPage}` : "Website reviews";
+const startPosition = (currentPage - 1) * PAGE_SIZE;
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={`Browse all ${sites.length} website reviews with clear categories, access labels, sorting, and pagination.`}
+  canonicalPath={canonicalPath}
+  noindex={sortId !== "featured"}
+>
+  <div class="shell page-shell reviews-page">
+    <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Reviews" }]} />
+    <header class="reviews-header">
+      <div>
+        <p class="eyebrow">All listings</p>
+        <h1>Website reviews</h1>
+        <p>Browse every listing, open the full review, or visit the destination directly.</p>
+      </div>
+      <div class="reviews-total"><strong>{sites.length}</strong><span>reviews</span></div>
+    </header>
+
+    <div class="reviews-toolbar">
+      <p>Showing {startPosition + 1}–{Math.min(startPosition + entries.length, sites.length)} of {sites.length}</p>
+      <label>
+        <span>Sort by</span>
+        <select data-review-sort>
+          {sortOptions.map((option) => (
+            <option value={withBase(reviewPath(option.id, 1))} selected={option.id === currentSort.id}>{option.label}</option>
+          ))}
+        </select>
+      </label>
+    </div>
+
+    <ol class="reviews-list" start={startPosition + 1}>
+      {entries.map((site, index) => {
+        const primaryCategory = categoryBySlug.get(site.categories[0]);
+        const metaLabels = Array.from(new Set([
+          primaryCategory?.shortName,
+          ...site.tags
+        ].filter(Boolean) as string[])).slice(0, 3);
+        return (
+          <li class="review-directory-item">
+            <span class="review-directory-index" aria-hidden="true">{String(startPosition + index + 1).padStart(2, "0")}</span>
+            <div class="review-directory-content">
+              <div class="review-directory-title">
+                <h2><a href={withBase(`/sites/${site.slug}/`)}>{site.name}</a></h2>
+                <span class={`price-chip price-${site.pricing.toLowerCase()}`}>{site.pricing}</span>
+              </div>
+              <p>{site.description}</p>
+              <div class="review-directory-meta">
+                {metaLabels.map((label) => <span>{label}</span>)}
+              </div>
+            </div>
+            <div class="review-directory-actions">
+              <a class="button button-outline" href={withBase(`/sites/${site.slug}/`)}>Read review</a>
+              <a class="button button-primary" href={site.url} target="_blank" rel={site.linkRel}>Visit site <span aria-hidden="true">↗</span></a>
+            </div>
+          </li>
+        );
+      })}
+    </ol>
+
+    {totalPages > 1 && (
+      <nav class="reviews-pagination" aria-label="Review pages">
+        {currentPage > 1
+          ? <a class="pagination-direction" href={withBase(reviewPath(sortId, currentPage - 1))}>← Previous</a>
+          : <span class="pagination-direction is-disabled">← Previous</span>}
+        <div>
+          {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
+            <a
+              href={withBase(reviewPath(sortId, pageNumber))}
+              aria-current={pageNumber === currentPage ? "page" : undefined}
+            >{pageNumber}</a>
+          ))}
+        </div>
+        {currentPage < totalPages
+          ? <a class="pagination-direction" href={withBase(reviewPath(sortId, currentPage + 1))}>Next →</a>
+          : <span class="pagination-direction is-disabled">Next →</span>}
+      </nav>
+    )}
+  </div>
+  <script>
+    document.querySelector<HTMLSelectElement>("[data-review-sort]")?.addEventListener("change", (event) => {
+      const select = event.currentTarget as HTMLSelectElement;
+      window.location.assign(select.value);
+    });
+  </script>
+</BaseLayout>

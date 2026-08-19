@@ -12,11 +12,12 @@ const year = new Date().getFullYear();
     </div>
     <nav aria-label="Directory">
       <strong>Explore</strong>
+      <a href={withBase("/reviews/")}>All reviews</a>
       <a href={withBase("/search/")}>Search the directory</a>
-      <a href={withBase("/about/")}>How rankings work</a>
     </nav>
     <nav aria-label="Legal">
       <strong>Information</strong>
+      <a href={withBase("/about/")}>About the directory</a>
       <a href={withBase("/legal/terms/")}>Terms</a>
       <a href={withBase("/legal/privacy/")}>Privacy</a>
       <a href={withBase("/legal/copyright/")}>Copyright</a>

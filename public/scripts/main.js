@@ -1,14 +1,3 @@
-const navToggle = document.querySelector("[data-nav-toggle]");
-const primaryNav = document.querySelector("[data-primary-nav]");
-
-if (navToggle && primaryNav) {
-  navToggle.addEventListener("click", () => {
-    const expanded = navToggle.getAttribute("aria-expanded") === "true";
-    navToggle.setAttribute("aria-expanded", String(!expanded));
-    primaryNav.toggleAttribute("data-open", !expanded);
-  });
-}
-
 const ageGate = document.querySelector("[data-age-gate]");
 const ageConfirmedKey = "directory-age-confirmed";
 
@@ -40,4 +29,3 @@ if (backToTop) {
   backToTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
   updateProgress();
 }
-

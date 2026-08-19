@@ -1,35 +1,13 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CategorySection from "../components/CategorySection.astro";
-import { categories, sites } from "../lib/catalog";
-import { withBase } from "../lib/urls";
+import { categories } from "../lib/catalog";
 ---
 
 <BaseLayout>
-  <section class="directory-intro">
-    <div class="shell intro-grid">
-      <div class="intro-copy">
-        <p class="eyebrow">Adult sites, clearly organized</p>
-        <h1>The adult web, sorted.</h1>
-        <p>
-          Scan the rankings, visit a site directly, or open its quick guide before you go.
-        </p>
-      </div>
-      <form class="hero-search" action={withBase("/search/")} method="get" role="search">
-        <label class="sr-only" for="home-search">Search the directory</label>
-        <input id="home-search" name="q" type="search" placeholder={`Search ${sites.length} sites`} autocomplete="off" />
-        <button type="submit">Search</button>
-      </form>
-    </div>
-  </section>
-
   <section class="directory-browser" aria-labelledby="directory-title">
     <div class="shell">
-      <header class="directory-heading">
-        <p class="eyebrow">The directory</p>
-        <h2 id="directory-title">Browse by category</h2>
-        <p>{categories.length} categories · {sites.length} curated listings</p>
-      </header>
+      <h1 id="directory-title" class="sr-only">Adult website directory</h1>
       <div class="directory-sections directory-board">
         {categories.map((category) => <CategorySection category={category} />)}
       </div>

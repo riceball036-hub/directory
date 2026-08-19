@@ -4,8 +4,11 @@ import { withBase } from "../lib/urls";
 export const prerender = true;
 
 export function GET({ site }: { site: URL }) {
+  const reviewPageCount = Math.ceil(sites.length / 6);
   const paths = [
     "/",
+    "/reviews/",
+    ...Array.from({ length: Math.max(0, reviewPageCount - 1) }, (_, index) => `/reviews/${index + 2}/`),
     "/about/",
     "/legal/terms/",
     "/legal/privacy/",
